@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>商品69码查询系统</title>
+    <script src="products-data.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px 0;
+            background: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 25px;
+            background: white;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+        .search-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #searchInput {
+            width: 70%;
+            padding: 12px 20px;
+            font-size: 30px;
+            border: 2px solid #007bff;
+            border-radius: 30px;
+            outline: none;
+            transition: all 0.3s;
+        }
+        #searchInput:focus {
+            box-shadow: 0 0 8px rgba(0,123,255,0.3);
+        }
+        .result-list {
+            margin: 25px 0;
+        }
+        .barcode-item {
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px solid #eee;
+            border-radius: 10px;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+        .barcode-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+        }
+        .product-info {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        .product-model {
+            font-size: 40px;
+            color: #333;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        .product-price {
+            color: #e63946;
+            font-size: 32px;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        .product-code {
+            color: #666;
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+        .product-category-brand {
+            color: #888;
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+        .barcode-img {
+            display: block;
+            margin: 0 auto;
+            height: 90px;
+            max-width: 85%;
+            image-rendering: crisp-edges;
+            background: white;
+            padding: 5px;
+            cursor: pointer;
+        }
+        .pagination-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .page-nav, .page-item {
+            font-size: 20px; 
+            padding: 8px 14px;
+            border: 1px solid #dee2e6;
+            border-radius: 6px;
+            cursor: pointer;
+            background: #f8f9fa;
+            color: #007bff;
+            transition: all 0.2s;
+            min-width: 40px;
+            text-align: center;
+        }
+        .page-nav:hover:not(.disabled),
+        .page-item:hover:not(.active) {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .active {
+            background: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+        .disabled {
+            color: #6c757d;
+            cursor: not-allowed;
+            background: #e9ecef;
+            border-color: #dee2e6;
+        }
+        .page-dots {
+            padding: 8px 12px;
+            color: #6c757d;
+        }
+        .total-pages {
+            margin-left: 15px;
+            color: #666;
+            font-size: 28px;
+        }
+        .barcode-error {
+            color: #dc3545;
+            text-align: center;
+            font-size: 28px;
+            padding: 10px;
+        }
+        /* 新增模态框样式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000000;
+            z-index: 1000;
+            cursor: pointer;
+        }
+        .modal-content {
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 90%;
+            text-align: center;
+            cursor: default;
+        }
+        .modal-barcode {
+            max-width: 100%;
+            height: auto;
+            max-height: 80vh;
+        }
+        .close {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            color: #aaa;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .close:hover {
+            color: #666;
+        }
+        .copyright {
+        text-align: center;     
+        margin: 30px auto 0;    
+        padding: 20px 0;
+        color: #666;
+        font-size: 20px;
+        border-top: 1px solid #eee;
+        width: 100%;            
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="search-box">
+            <input type="text" id="searchInput" placeholder="输入商品型号进行搜索...">
+        </div>
+        <div class="result-list" id="resultList"></div>
+        <div id="pagination"></div>
+        <div class="copyright">
+            版权所有：mohann
+        </div>
+    </div>
+
+    <!-- 条形码放大模态框 -->
+    <div id="barcodeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img class="modal-barcode" id="modalBarcode">
+        </div>
+    </div>
+
+    <script>
+        // 产品数据初始化
+        const products = products_data;
+        const config = {
+            pageSize: 5,
+            currentPage: 1
+        };
+
+        // 搜索功能
+        function searchProducts(keyword) {
+            return products.filter(item => 
+                item.model.toLowerCase().includes(keyword.toLowerCase())
+            );
+        }
+
+        // 分页功能
+        function paginate(data, page, pageSize) {
+            const start = (page - 1) * pageSize;
+            const end = start + pageSize;
+            return {
+                results: data.slice(start, end),
+                totalPages: Math.ceil(data.length / pageSize)
+            };
+        }
+
+        // 分页渲染
+        function renderPagination(totalPages) {
+            const container = document.getElementById('pagination');
+            let html = `<div class="pagination-container">`;
+
+            // 导航按钮
+            html += `
+                <button class="page-nav ${config.currentPage === 1 ? 'disabled' : ''}" 
+                    onclick="changePage(1)">首页</button>
+                <button class="page-nav ${config.currentPage === 1 ? 'disabled' : ''}" 
+                    onclick="changePage(${config.currentPage - 1})">上一页</button>
+            `;
+
+            // 页码生成
+            const visiblePages = 2;
+            let startPage = Math.max(1, config.currentPage - visiblePages);
+            let endPage = Math.min(totalPages, config.currentPage + visiblePages);
+
+            if (startPage > 1) {
+                html += `<button class="page-item" onclick="changePage(1)">1</button>`;
+                if (startPage > 2) html += `<span class="page-dots">...</span>`;
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `
+                    <button class="page-item ${i === config.currentPage ? 'active' : ''}" 
+                        onclick="changePage(${i})">${i}</button>
+                `;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) html += `<span class="page-dots">...</span>`;
+                html += `<button class="page-item" onclick="changePage(${totalPages})">${totalPages}</button>`;
+            }
+
+            // 导航按钮
+            html += `
+                <button class="page-nav ${config.currentPage === totalPages ? 'disabled' : ''}" 
+                    onclick="changePage(${config.currentPage + 1})">下一页</button>
+                <button class="page-nav ${config.currentPage === totalPages ? 'disabled' : ''}" 
+                    onclick="changePage(${totalPages})">末页</button>
+                <span class="total-pages">共 ${totalPages} 页</span>
+            `;
+
+            html += `</div>`;
+            container.innerHTML = html;
+        }
+
+        // 换页功能
+        function changePage(page) {
+            const totalPages = Math.ceil(products.length / config.pageSize);
+            page = Math.max(1, Math.min(page, totalPages));
+            config.currentPage = page;
+            performSearch();
+        }
+
+        // 生成条形码
+        function generateBarcode(code, height = 90) {
+            try {
+                const canvas = document.createElement('canvas');
+                JsBarcode(canvas, code, {
+                    format: "CODE128",
+                    displayValue: false,
+                    height: height,
+                    margin: 0,
+                    width: 4
+                });
+                return canvas.toDataURL();
+            } catch (error) {
+                console.error('条形码生成失败:', error);
+                return null;
+            }
+        }
+
+        // 显示放大条形码
+        function showBarcodeModal(code) {
+            const modal = document.getElementById('barcodeModal');
+            const modalImg = document.getElementById('modalBarcode');
+            const bigBarcode = generateBarcode(code, 300);
+            
+            if (bigBarcode) {
+                modalImg.src = bigBarcode;
+                modal.style.display = "block";
+            }
+        }
+
+        // 执行搜索
+        function performSearch() {
+            const keyword = document.getElementById('searchInput').value;
+            const filtered = searchProducts(keyword);
+            const paginated = paginate(filtered, config.currentPage, config.pageSize);
+
+const html = paginated.results.map(item => {
+    const barcode = generateBarcode(item.code);
+    return `
+        <div class="barcode-item">
+            <div class="product-info">
+                <div class="product-model">${item.model}</div>
+                <div class="product-price">备案价格：¥${item.price}</div>
+                <div class="product-code">69码：${item.code}</div>
+                <div class="product-category-brand">品类：${item.category} | 品牌：${item.brand}</div>
+            </div>
+            ${barcode 
+                ? `<img src="${barcode}" 
+                      class="barcode-img" 
+                      alt="${item.code}"
+                      onclick="showBarcodeModal('${item.code}')">` 
+                : '<div class="barcode-error">条形码生成失败</div>'}
+        </div>
+    `;
+}).join('');
+
+            document.getElementById('resultList').innerHTML = html;
+            renderPagination(paginated.totalPages);
+        }
+
+        // 事件监听
+        document.getElementById('searchInput').addEventListener('input', () => {
+            config.currentPage = 1;
+            performSearch();
+        });
+
+        // 模态框关闭
+        document.getElementById('barcodeModal').addEventListener('click', function(e) {
+            if (e.target.classList.contains('modal') || e.target.classList.contains('close')) {
+                this.style.display = "none";
+            }
+        });
+
+        // 初始化加载
+        performSearch();
+    </script>
+</body>
+</html>
