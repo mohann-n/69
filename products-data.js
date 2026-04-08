@@ -127525,5 +127525,277 @@ const products_data = [
     "code": "6974678140815",
     "category": "空调",
     "brand": "万宝"
+  },
+    {
+    "model": "华为 Vision 智慧屏 5 SE 55吋 4K LCD 平面 Mini-LED 3GB+64GB AI摄像头 星际黑",
+    "price": "2799.00",
+    "code": "6942103159077",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为 Vision 智慧屏 5 SE 65吋 4K LCD 平面 Mini-LED 3GB+64GB AI摄像头 星际黑",
+    "price": "3299.00",
+    "code": "6942103159084",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为 Vision 智慧屏 5 SE 75吋 4K LCD 平面 Mini-LED 3GB+64GB AI摄像头 星际黑",
+    "price": "4499.00",
+    "code": "6942103159091",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为 Vision 智慧屏 5 SE 85吋 4K LCD 平面 Mini-LED 3GB+64GB AI摄像头 星际黑",
+    "price": "6599.00",
+    "code": "6942103159107",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S6 55英寸",
+    "price": "2999.00",
+    "code": "6942103159114",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S6 65英寸",
+    "price": "3999.00",
+    "code": "6942103159121",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S6 75英寸",
+    "price": "5999.00",
+    "code": "6942103159138",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S6 85英寸",
+    "price": "7999.00",
+    "code": "6942103159145",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV 65英寸",
+    "price": "8999.00",
+    "code": "6942103171666",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV 75英寸",
+    "price": "11999.00",
+    "code": "6942103171673",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV 85英寸",
+    "price": "15999.00",
+    "code": "6942103171680",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV 98英寸",
+    "price": "24999.00",
+    "code": "6942103171697",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV Pro 75英寸",
+    "price": "14999.00",
+    "code": "6942103171703",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV Pro 85英寸",
+    "price": "21999.00",
+    "code": "6942103171710",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV Pro 98英寸",
+    "price": "30999.00",
+    "code": "6942103171727",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 MateTV Max 110英寸",
+    "price": "64999.00",
+    "code": "6942103171734",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 5 Pro 65英寸",
+    "price": "6499.00",
+    "code": "6942103167041",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 5 Pro 85英寸",
+    "price": "10999.00",
+    "code": "6942103167065",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 5 Pro 75英寸",
+    "price": "8499.00",
+    "code": "6942103167058",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 V6 85英寸",
+    "price": "12999.00",
+    "code": "6942103185366",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 98英寸",
+    "price": "16499.00",
+    "code": "6942103186288",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S7 Pro 75英寸",
+    "price": "10999.00",
+    "code": "6942103186301",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 65英寸",
+    "price": "6499.00",
+    "code": "6942103186257",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 75英寸",
+    "price": "7499.00",
+    "code": "6942103186264",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 SE 75英寸",
+    "price": "5899.00",
+    "code": "6942103191756",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 SE 65英寸",
+    "price": "4899.00",
+    "code": "6942103191749",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 SE 85英寸",
+    "price": "7899.00",
+    "code": "6942103191763",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S7 Pro 85英寸",
+    "price": "12999.00",
+    "code": "6942103186318",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 V6 75英寸",
+    "price": "9999.00",
+    "code": "6942103185359",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 V6 98英寸",
+    "price": "17999.00",
+    "code": "6942103185373",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S7 Pro 98英寸",
+    "price": "18999.00",
+    "code": "6942103186325",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 85英寸",
+    "price": "10499.00",
+    "code": "6942103186271",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为Vision智慧屏 6 SE 55英寸",
+    "price": "3899.00",
+    "code": "6942103191732",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
+  },
+  {
+    "model": "华为智慧屏 S7 Pro 65英寸",
+    "price": "7999.00",
+    "code": "6942103186295",
+    "category": "电视",
+    "brand": "HUAWEI"
+,
   }
 ];
