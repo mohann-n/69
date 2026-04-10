@@ -71450,6 +71450,13 @@ const products_data = [
     "brand": "格力"
   },
   {
+    "model": "格力空调京桂Pro变频挂机KFR-35GW/(35587)FNhAh-B1",
+    "price": "3299.00",
+    "code": "6941783846505",
+    "category": "空调",
+    "brand": "格力"
+  },
+  {
     "model": "格力空调云舒氧proKFR-26GW/NhHm1BG",
     "price": "5099.00",
     "code": "6941783854463",
